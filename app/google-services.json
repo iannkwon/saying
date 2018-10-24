@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "288222373204",
+    "firebase_url": "https://saying-839dc.firebaseio.com",
+    "project_id": "saying-839dc",
+    "storage_bucket": "saying-839dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:288222373204:android:431a1cfd6779e785",
+        "android_client_info": {
+          "package_name": "ian.com.saying"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "288222373204-n66t3i24d1n53qo1qukl0b4menediblc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrgOOaIp2glbUjbV2MPhujMyhljlF8Iz8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

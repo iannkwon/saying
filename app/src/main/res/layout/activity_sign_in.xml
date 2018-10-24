@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/rl_signin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_title"
+            android:text="로그인"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textSize="42dp"
+            android:textColor="#000000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"/>
+
+        <EditText
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_email"
+            android:hint="E-Mail"
+            android:inputType="text"
+            android:textColorHint="#000000"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:maxLength="25"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_title"
+            android:layout_marginTop="30dp"/>
+
+        <EditText
+            android:layout_width="160dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_pw"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColorHint="#000000"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:maxLength="15"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/et_email"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_login"
+            android:text="로그인"
+            android:textColor="#000000"
+            android:background="#E5E2DB"
+            android:layout_below="@+id/et_pw"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_signup"
+            android:text="간단하게 회원가입"
+            android:textColor="#000000"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/btn_login"
+            android:layout_alignLeft="@+id/btn_login"
+            android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_anony"
+            android:text="둘러보기"
+            android:textColor="#000000"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/tv_signup"
+            android:layout_alignLeft="@+id/btn_login"
+            android:layout_marginTop="15dp"/>
+
+
+
+    </RelativeLayout>
+
+</layout>
