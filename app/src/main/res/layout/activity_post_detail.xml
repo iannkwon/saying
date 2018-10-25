@@ -16,6 +16,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true" />
 
+    <ImageView
+        android:id="@+id/report"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:src="@drawable/ic_button_report" />
+
     <include
         android:id="@+id/postTextLayout"
         layout="@layout/include_post_text"

@@ -5,6 +5,8 @@ import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.regex.Pattern;
 
 import ian.com.saying.databinding.ActivitySignInBinding;
 import ian.com.saying.model.User;
@@ -48,6 +52,13 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
             }
         });
 
+        // 영문만 입력
+        InputFilter[] filters = new InputFilter[]{
+                inputFilter,
+                new InputFilter.LengthFilter(16)
+        };
+        binding.etEmail.setFilters(filters);
+
         binding.btnLogin.setOnClickListener(this);
         binding.tvSignup.setOnClickListener(this);
         binding.tvAnony.setOnClickListener(this);
@@ -69,7 +80,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         }
         showProgressDialog();
 
-        mAuth.signInWithEmailAndPassword(binding.etEmail.getText().toString().trim(),
+        mAuth.signInWithEmailAndPassword(binding.etEmail.getText().toString().trim()+"@saying.com",
                 binding.etPw.getText().toString().trim()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -79,7 +90,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                     finish();
                 }else{
                     hideProgressDialog();
-                    Toast.makeText(getApplicationContext(), "로그인이 실패했습니다.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "아이디와 암호를 확인해 주세요.", Toast.LENGTH_LONG).show();
                 }
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -89,6 +100,17 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
             }
         });
     }
+
+    public InputFilter inputFilter = new InputFilter() {
+        @Override
+        public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            Pattern pattern = Pattern.compile("^[a-zA-Z0-9]*$");
+            if (!pattern.matcher(source).matches()){
+                return "";
+            }
+            return null;
+        }
+    };
 
     private boolean validateFrom(){
         boolean result = true;

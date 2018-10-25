@@ -54,6 +54,7 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     private EditText mCommentField;
     private Button mCommentButton;
     private RecyclerView mCommentsRecycler;
+    private ImageView mImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,16 +81,12 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
         mCommentField = findViewById(R.id.fieldCommentText);
         mCommentButton = findViewById(R.id.buttonPostComment);
         mCommentsRecycler = findViewById(R.id.recyclerPostComments);
-
+        mImageView = findViewById(R.id.report);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN );
-        mLayoutView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mLayoutView.getWindowToken(), 0);
-            }
-        });
+
+        mLayoutView.setOnClickListener(this);
         mCommentButton.setOnClickListener(this);
+        mImageView.setOnClickListener(this);
         mCommentsRecycler.setLayoutManager(new LinearLayoutManager(this));
 
     }
@@ -150,12 +147,34 @@ public class PostDetailActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         int i = v.getId();
         if (i == R.id.buttonPostComment) {
-            if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous()){
+            if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
                 Toast.makeText(getApplication(), "로그인을 해주세요.", Toast.LENGTH_LONG).show();
-            }else{
+            } else {
                 postComment();
             }
+        } else if (i == R.id.rl_postDetail){
+            InputMethodManager imm = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(mLayoutView.getWindowToken(), 0);
+        } else if (i == R.id.report){
+            if (FirebaseAuth.getInstance().getCurrentUser().isAnonymous()) {
+                Toast.makeText(getApplication(), "로그인을 해주세요.", Toast.LENGTH_LONG).show();
+            } else {
+                AlertDialog.Builder ab = new AlertDialog.Builder(this);
+                ab.setMessage("해당 글을 신고하시겠어요?");
+                ab.setCancelable(false);
+                ab.setPositiveButton("신고", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mPostReference.child("report").setValue(getUid());
+                    }
+                });
+                ab.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                }).show();
+            }
         }
     }
 
